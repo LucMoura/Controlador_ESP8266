@@ -27,19 +27,71 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-     request->send(200, "text/html", R"rawliteral(
-    <!DOCTYPE html>
+    request->send(200, "text/html", R"rawliteral(
+   <!DOCTYPE html>
     <html>
+    <head>
+    <meta charset = "UTF-8">
+    <title>Controlador interessante</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f0f8ff; 
+          color: #333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+
+        h2 {
+          color: #4a90e2; 
+          font-size: 2em;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        button {
+          background-color: #4a90e2; 
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 15px 30px;
+          font-size: 1.2em;
+          margin: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+          background-color: #357ab7; 
+        }
+
+        button:active {
+          background-color: #2a5d8d; 
+        }
+
+        .container {
+          text-align: center;
+        }
+
+      </style>
+    </head>
     <body>
-      <h2>Controle do Relé</h2>
-      <button onclick="ligar()">Ligar</button>
-      <button onclick="desligar()">Desligar</button>
+      <div class="container">
+        <h2>Controlador remoto</h2>
+        <button onclick="ligar()">Ligar</button>
+        <button onclick="desligar()">Desligar</button>
+      </div>
+
       <script>
         function ligar() {
           fetch('/ligar').then(response => response.text()).then(data => {
             console.log(data);
           });
         }
+
         function desligar() {
           fetch('/desligar').then(response => response.text()).then(data => {
             console.log(data);
@@ -49,7 +101,8 @@ void setup() {
     </body>
     </html>
   )rawliteral");
-  });
+});
+
 
   server.on("/ligar", HTTP_GET, [](AsyncWebServerRequest *request) {
     digitalWrite(relayPin, LOW);
