@@ -34,6 +34,7 @@ Este programa utiliza o ESP8266 para se conectar a uma rede Wi-Fi e hospedar um 
 
    - Abra o Arduino IDE e crie um novo esboço.
    - Copie e cole o código-fonte adaptado abaixo, substituindo o nome da sua rede Wi-Fi e a senha.
+   - No meu caso os pinos estavam invertiods, então para ligar eu tive que colocar o comando LOW, se por um acaso no seu projeto o botão Ligar estiver desligando, troque no código na àrea do comando para HIGH.
 
 3. **Carregar o Código para o ESP8266**:
 
